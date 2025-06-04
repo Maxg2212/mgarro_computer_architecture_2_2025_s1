@@ -1,0 +1,78 @@
+# Workshop 2: SIMD Extensions and Intrinsics
+
+This project corresponds to the second workshop for the course **CE4302 – Computer Architecture II** at the Instituto Tecnológico de Costa Rica. The objective is to implement, compare, and analyze a character counting algorithm using both a **scalar (serial)** approach and a **SIMD-optimized** version using **SSE2 intrinsics**.
+
+
+## Main Files
+
+- `src/char_count_serial.cpp`: Serial implementation of the character counting algorithm.
+- `src/char_count_simd.cpp`: SIMD-based implementation using SSE2 intrinsics.
+- `src/utils.cpp` / `utils.h`: Shared helper functions, including aligned random string generation and memory usage tracking.
+- `benchmark.sh`: Shell script to compile and benchmark both implementations across various sizes and alignments.
+- `plot_benchmark_results.py`: Python script that generates performance graphs based on collected benchmark data.
+
+## Requirements
+
+- A Unix-like system (Linux recommended)
+- A C++ compiler with C++17 support (`g++`)
+- Python 3 with the following packages:
+
+  ```bash
+  pip install matplotlib pandas
+  ```
+## Compilation
+
+Use the provided `Makefile` to compile the project:
+
+```bash
+make
+```
+
+The compiled binaries will be placed in the `build/` directory:
+
+- `results_serial.csv`
+- `results_simd.csv`
+
+
+## Usage
+
+### 1. Run Benchmarks
+
+Ensure the benchmark script is executable:
+
+```bash
+chmod +x benchmark.sh
+./benchmark.sh
+```
+
+This will generate two CSV files with execution time, memory usage, and character count:
+- `results_serial.csv`
+- `results_simd.csv`
+
+### 2. Generate Plots
+
+To visualize performance comparisons:
+
+```bash
+python3 benchmark.py
+```
+
+This will display and save execution time graphs for both implementations under each alignment setting. Output files:
+
+- exec_time_align_16.png
+- exec_time_align_64.png
+
+## SIMD Code Validation
+
+The SIMD version was implemented using SSE2 intrinsics with 128-bit registers and support for unaligned memory access (`_mm_loadu_si128`). For comparison and portability testing, the function was translated to ARM NEON intrinsics using a large language model (LLM).
+
+Validation was done using Compiler Explorer:
+
+🔗 [View SIMD Code in Compiler Explorer](https://godbolt.org/z/sj33s155P)
+
+## Authors
+
+- Max Garro Mora
+- Naheem Johnson Solís
+- CE4302 – Group 2 
+- I Semester 2025
