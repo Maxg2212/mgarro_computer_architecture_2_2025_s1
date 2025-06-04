@@ -1,0 +1,34 @@
+int contarCaracteres(const std::string& str, char char_x){
+	int contador = 0
+	for (char c : str){
+		if (c == char_x) {
+			++contador
+		}
+	}
+	return contador
+}
+
+char selectorCaracter(char char_x, char caracter){
+	caracter = char_x
+}
+
+int main(){
+	char caracterseleccionado = selectorCaracter(char_x, caracter)
+	
+	int ocurrencias = contarCaracteres(str, char_x)
+	std::cout << "El caracter: " << caracterseleccionado << "aparece " << ocurrencias << "veces" << std::endl;
+	
+	return 0
+}
+
+
+char char_x = ';'; // El carácter a replicar
+
+// Crea un vector SIMD con 16 elementos de char_x replicado
+__m128i vect_x = _mm_set1_epi8(char_x);
+
+alignas(16) char b[16] = {'a','x','c','y','e','z','g','h','i','j','0','1','2','3','4','5'};
+// Compara vectores
+__m128i vect_x = _mm_set1_epi8(char_x);
+__m128i vect_y = _mm_load_si128(reinterpret_cast<__m128i*>(b));
+__m128i out_str = _mm_cmpeq_epi8(vect_y, vect_x); // comparar
